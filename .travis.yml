@@ -8,3 +8,17 @@ before_install:
 
 script:
   - docker run test npm test -- --coverage
+
+deploy:
+  provider: elasticbeanstalk
+  region: 'us-west-2'
+  app: 'Gene-Cognito-Test'
+  env: 'docker-ci-env'
+  bucket_name: 'elasticbeanstalk-us-west-2-828880248823'
+  bucket_path: 'Gene-Cognito-Test'
+  on:
+    branch: master
+  access_key_id: $AWS_ACCESS_KEY
+
+  secret_key_id:
+    secure: "$AWS_SECRET_KEY"
